@@ -10,6 +10,7 @@ export default {
         {label: 'Home', to: '/home'},
         {label: 'About', to: '/about'},
         {label: 'Events', to: '/eventManagement/event'},
+        {label: 'Sign Up', to: '/sign-up'},
       ]
     }
   }
@@ -34,6 +35,8 @@ export default {
         </div>
       </template>
     </pv-toolbar>
+      <pv-toast position="top-right"></pv-toast>
+
   </div>
 </template>
 

@@ -45,6 +45,7 @@ import InputNumber      from "primevue/inputnumber";
 import FloatLabel       from "primevue/floatlabel";
 import Checkbox         from "primevue/checkbox";
 import Rating           from "primevue/rating";
+import Password         from 'primevue/password';
 
 createApp(App)
     .use(router)
@@ -74,4 +75,5 @@ createApp(App)
     .component('pv-textarea',       Textarea)
     .component('pv-toolbar',        Toolbar)
     .component('pv-toast',          Toast)
+    .component('pv-password',       Password)
     .mount('#app')

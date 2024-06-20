@@ -5,12 +5,15 @@ export default {
   name: "event-card.component",
   props: {
     event: Event,
-  }
+  },
+    mounted() {
+        console.log(this.event.location.city);
+    }
 }
 </script>
 
 <template>
-  <pv-card class="custom-card" style="width: 25rem; height: 10rem; overflow: hidden">
+  <pv-card class="custom-card" style="overflow: hidden">
     <template #content>
       <div class="card-content">
         <div class="card-details">
@@ -29,5 +32,8 @@ export default {
 </template>
 
 <style scoped>
-
+.custom-card{
+    width: 100%;
+    height: auto;
+}
 </style>
