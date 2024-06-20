@@ -7,10 +7,11 @@ export default {
   data() {
     return {
       items: [
-        {label: 'Home', to: '/home'},
-        {label: 'About', to: '/about'},
-        {label: 'Events', to: '/eventManagement/event'},
-        {label: 'Sign Up', to: '/sign-up'},
+          {label: 'Home', to: '/home'},
+          {label: 'About', to: '/about'},
+          {label: 'Events', to: '/eventManagement/event'},
+          {label: 'Sign Up', to: '/sign-up'},
+          {label: 'Sign In', to: '/sign-in'},
       ]
     }
   }
