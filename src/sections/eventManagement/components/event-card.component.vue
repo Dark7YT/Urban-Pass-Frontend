@@ -2,7 +2,7 @@
 import { Event } from "../model/event.entity.js";
 
 export default {
-  name: "event-card.component",
+  name: "event-card",
   props: {
     event: Event,
   },
@@ -13,27 +13,31 @@ export default {
 </script>
 
 <template>
-  <pv-card class="custom-card" style="overflow: hidden">
-    <template #content>
-      <div class="card-content">
-        <div class="card-details">
-          <h2 class="card-title">{{event.name}}</h2>
-          <p class="card-subtitle">{{event.description}}</p>
-          <p class="card-subtitle">{{event.date}}</p>
-          <p class="card-subtitle">{{event.location.venue}}</p>
-          <p class="card-subtitle">{{event.location.city}}</p>
-          <p class="card-subtitle">{{event.location.country}}</p>
-          <p class="card-subtitle">{{event.maxTickets}}</p>
-          <p class="card-subtitle">{{event.soldTickets}}</p>
-        </div>
-      </div>
-    </template>
-  </pv-card>
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title">{{ event.name }}</h5>
+      <p class="card-text">{{ event.description }}</p>
+      <p class="card-text">{{ event.date }}</p>
+      <p class="card-text">{{ event.location.venue }}</p>
+      <p class="card-text">{{ event.location.city }}</p>
+      <p class="card-text">{{ event.location.country }}</p>
+    </div>
+  </div>
 </template>
 
 <style scoped>
-.custom-card{
-    width: 100%;
-    height: auto;
+.card {
+  width: 18rem;
+  margin: 1rem;
+}
+.card-body {
+  padding: 1rem;
+}
+.card-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+.card-text {
+  font-size: 1rem;
 }
 </style>

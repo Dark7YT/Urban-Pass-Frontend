@@ -7,7 +7,6 @@ export default {
   data() {
     return {
       items: [
-          {label: 'Home', to: '/home'},
           {label: 'About', to: '/about'},
           {label: 'Events', to: '/eventManagement/event'},
           {label: 'Sign Up', to: '/sign-up'},
@@ -22,7 +21,9 @@ export default {
   <div class="card">
     <pv-toolbar style="border-radius: 3rem; padding: 1rem 1rem 1rem 1.5rem">
       <template #start>
-        <img class="image" src="../../../public/urbanPass-logo.png" alt="">
+        <router-link to="/home">
+          <img class="image" src="../../../public/urbanPass-logo.png" alt="">
+        </router-link>
         <h1 class="title">Urban Pass</h1>
       </template>
 
@@ -51,5 +52,10 @@ export default {
 .title{
   font-size: 1.5rem;
   margin-left: 1rem;
+}
+.card {
+  width: 100%;
+  margin: 0;
+  border-bottom: 1px solid black;
 }
 </style>
