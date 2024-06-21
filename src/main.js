@@ -46,6 +46,8 @@ import FloatLabel       from "primevue/floatlabel";
 import Checkbox         from "primevue/checkbox";
 import Rating           from "primevue/rating";
 import Password         from 'primevue/password';
+import Splitter from 'primevue/splitter';
+import SplitterPanel from 'primevue/splitterpanel';
 
 createApp(App)
     .use(router)
@@ -76,4 +78,7 @@ createApp(App)
     .component('pv-toolbar',        Toolbar)
     .component('pv-toast',          Toast)
     .component('pv-password',       Password)
+    .component('pv-splitter',       Splitter)
+    .component('pv-splitter-panel', SplitterPanel)
+    .component('pv-button',         Button)
     .mount('#app')

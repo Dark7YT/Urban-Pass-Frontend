@@ -19,6 +19,7 @@ export default {
     this.eventsService.getAllEvents()
         .then(response => {
             this.events = response.data;
+            console.log(this.events.find(event => event.id === this.id));
         })
         .catch(e => {
             console.log(e);
@@ -32,14 +33,18 @@ export default {
     <div class="container">
       <div class="column">
         <h1 class="title">Events</h1>
-        <div class="card-container">
-          <event-card-component
-              class="event-card"
-              v-for="event in events"
-              :key="event.id"
-              :event="event"
-          ></event-card-component>
-        </div>
+          <div class="card-container">
+              <router-link
+                      class="router-link"
+                      v-for="event in events"
+                      :key="event.id"
+                      :to="'/event/' + event._id">
+              <event-card-component
+                      class="event-card"
+                      :event="event"
+              ></event-card-component>
+              </router-link>
+          </div>
       </div>
     </div>
   </div>
@@ -47,19 +52,31 @@ export default {
 </template>
 
 <style scoped>
+.router-link {
+    all: unset;
+    cursor: pointer;
+}
+.container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
 .card-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; /* Los elementos se alinearán al centro del contenedor */
 }
 .event-card {
-  flex: 1 0 20%; /* Cada tarjeta comenzará con un 20% del ancho total, permitiendo hasta 4 tarjetas por fila */
-  margin: 0.5rem;
-  border: 1px solid black;
-  border-radius: 10px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+    flex: 0 0 20%; /* Las tarjetas no crecerán más allá de su base de 25% */
+    margin: 0.5rem;
+    margin-bottom: 2rem;
+    height: 38rem;
 }
-
+/deep/ .p-card-header{
+    height: 30%;
+    overflow: hidden;
+}
 /* Ajustes para pantallas más pequeñas */
 @media (max-width: 1200px) {
   .event-card {

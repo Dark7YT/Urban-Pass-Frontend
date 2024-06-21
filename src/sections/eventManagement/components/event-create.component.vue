@@ -5,65 +5,76 @@ export default {
   name: "event-create",
   data() {
     return {
-      name: null,
-      description: null,
-      date: null,
-      venue: null,
-      city: null,
-      country: null,
-      apiService: new EventApiService()
+        name: null,
+        description: null,
+        date: null,
+        venue: null,
+        city: null,
+        country: null,
+        image: null,
+        apiService: new EventApiService()
     }
   },
   methods: {
-    async submitForm() {
-      if (!this.name || !this.description || !this.date || !this.venue || !this.city || !this.country) {
-        this.$toast.add({
-          severity: 'error',
-          summary: 'Error',
-          detail: 'All fields must be filled out.',
-          life: 5000
-        });
-        return;
-      }
+      onFileChange(e) {
+          this.image = e.target.files[0];
+      },
+      async submitForm() {
+          if (!this.name || !this.description || !this.date || !this.venue || !this.city || !this.country) {
+              this.$toast.add({
+                  severity: 'error',
+                  summary: 'Error',
+                  detail: 'All fields must be filled out.',
+                  life: 5000
+              });
+              return;
+          }
 
-      const eventResource = {
-        name: this.name,
-        description: this.description,
-        date: this.date,
-        location: {
-          venue: this.venue,
-          city: this.city,
-          country: this.country
-        }
-      };
-      try {
-        const response = await this.apiService.create(eventResource);
-        console.log(response);
-        this.$toast.add({
-          severity: 'success',
-          summary: 'Success',
-          detail: 'Event created successfully!',
-          life: 5000
-        });
-        this.$router.push('/eventManagement/event');
-      } catch (error) {
-        console.error(error);
-        this.$toast.add({
-          severity: 'error',
-          summary: 'Error',
-          detail: 'Event creation failed. Please try again.',
-          life: 5000
-        });
-      }
+          const eventResource = {
+              name: this.name,
+              description: this.description,
+              date: this.date,
+              location: {
+                  venue: this.venue,
+                  city: this.city,
+                  country: this.country
+              }
+          };
 
-      // Limpiar los campos del formulario
-      this.name = null;
-      this.description = null;
-      this.date = null;
-      this.venue = null;
-      this.city = null;
-      this.country = null;
-    }
+          const formData = new FormData();
+          formData.append('event', new Blob([JSON.stringify(eventResource)], { type: 'application/json' })); // Convertir el recurso del evento a JSON y agregarlo al FormData
+          formData.append('image', this.image); // Agregar la imagen al FormData
+
+          try {
+              const response = await this.apiService.create(formData);
+              console.log(response);
+              this.$toast.add({
+                  severity: 'success',
+                  summary: 'Success',
+                  detail: 'Event created successfully!',
+                  life: 5000
+              });
+              this.$router.push('/eventManagement/event');
+          } catch (error) {
+              console.error(error);
+              this.$toast.add({
+                  severity: 'error',
+                  summary: 'Error',
+                  detail: 'Event creation failed. Please try again.',
+                  life: 5000
+              });
+          }
+
+          // Limpiar los campos del formulario
+          this.name = null;
+          this.description = null;
+          this.date = null;
+          this.venue = null;
+          this.city = null;
+          this.country = null;
+          this.image = null; // Limpiar el campo de la imagen
+          this.$refs.fileInput.value = null;
+      }
   }
 }
 </script>
@@ -102,6 +113,11 @@ export default {
           <label for="country">Country</label>
         </pv-float-label>
       </div>
+
+        <div class="input-row">
+            <label for="image">Image</label>
+            <input type="file" id="image" class="event-create-text" @change="onFileChange" accept=".jpg, .jpeg, .png" />
+        </div>
     </div>
     <pv-button class="event-create-button" @click="submitForm">Create Event</pv-button>
   </div>
@@ -140,5 +156,24 @@ export default {
   align-items: center;
   margin-top: 50px;
   width: 300px !important;
+}
+.input-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center; /* Alinea verticalmente los elementos en el centro */
+    width: 40%;
+    margin-bottom: 10px; /* Agrega un margen en la parte inferior */
+}
+
+.input-row label {
+    font-size: 1rem;
+    color: #333;
+    margin-right: 10px; /* Agrega un margen a la derecha */
+}
+
+.input-row input[type="file"] {
+    border: 1px solid #ccc;
+    padding: 5px;
+    color: #333;
 }
 </style>

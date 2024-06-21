@@ -7,8 +7,12 @@ export class EventApiService {
     getEventById(id) {
         return http.get(`/event/findById/${id}`);
     }
-    create(eventResoruce) {
-        return http.post('/event/insert', eventResoruce);
+    create(eventResource) {
+        return http.post('/event/insert', eventResource, {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        });
     }
     delete(id) {
         return http.delete(`/event/delete/{id}`);
