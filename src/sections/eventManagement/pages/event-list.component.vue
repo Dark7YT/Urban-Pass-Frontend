@@ -16,14 +16,18 @@ export default {
   },
   created() {
     this.eventsService = new EventApiService();
-    this.eventsService.getAllEvents()
-        .then(response => {
-            this.events = response.data;
-            console.log(this.events.find(event => event.id === this.id));
-        })
-        .catch(e => {
-            console.log(e);
-        });
+    this.fetchEvents();
+  },
+  methods: {
+    fetchEvents() {
+        this.eventsService.getAllEvents()
+            .then(response => {
+                this.events = response.data;
+            })
+            .catch(e => {
+                console.log(e);
+            });
+    }
   }
 }
 </script>
@@ -38,7 +42,7 @@ export default {
                       class="router-link"
                       v-for="event in events"
                       :key="event.id"
-                      :to="'/event/' + event._id">
+                      :to="'/eventManagement/event/' + event._id">
               <event-card-component
                       class="event-card"
                       :event="event"
@@ -48,7 +52,7 @@ export default {
       </div>
     </div>
   </div>
-  <event-create></event-create>
+  <event-create @eventCreated="fetchEvents"></event-create>
 </template>
 
 <style scoped>

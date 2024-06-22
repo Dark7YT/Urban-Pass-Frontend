@@ -54,6 +54,7 @@ export default {
                   detail: 'Event created successfully!',
                   life: 5000
               });
+              this.$emit('eventCreated');
               this.$router.push('/eventManagement/event');
           } catch (error) {
               console.error(error);
