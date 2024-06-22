@@ -30,6 +30,8 @@ export default {
                     detail: 'Login successful. Welcome!',
                     life: 5000
                 });
+                localStorage.setItem('user', JSON.stringify(response.data));
+                window.dispatchEvent(new Event('storage'));
                 this.$router.push('/eventManagement/event');
             } catch (error) {
                 console.error(error);
