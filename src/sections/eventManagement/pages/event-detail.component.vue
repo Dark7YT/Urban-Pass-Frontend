@@ -143,7 +143,6 @@ export default {
                 </div>
             </div>
         </div>
-      <h1 class="comment-title">Comments</h1>
       <div class="reviews-container">
         <review-card-component
             v-for="review in reviews"
@@ -184,9 +183,5 @@ export default {
     flex-direction: column;
     align-items: flex-start;
     margin-left: 10rem;
-}
-.comment-title{
-    margin-left: 10rem;
-    font-size: 2em;
 }
 </style>

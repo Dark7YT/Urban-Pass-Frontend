@@ -24,8 +24,10 @@ export default {
     this.fetchReviews();
     let user = JSON.parse(localStorage.getItem('user'));
     let userId = user._id;
+    console.log('el user id es ' + userId);
     if (this.review.reaction.userIdList.includes(userId)) {
       this.isClicked = true;
+      console.log('el user id entro ' + userId);
     }
   },
   methods: {
@@ -50,6 +52,7 @@ export default {
         this.reviewService.deleteReactions(this.review._id, userId)
             .then(response => {
               console.log(response.data);
+              location.reload();
               this.reaction.pop(userId);
             })
             .catch(e => {
@@ -60,11 +63,17 @@ export default {
             .then(response => {
               console.log(response.data);
               this.reaction.push(userId);
+              location.reload();
             })
             .catch(e => {
               console.log(e);
             });
       }
+    }
+  },
+  computed: {
+    userIdListLength() {
+      return this.review.reaction.userIdList.length;
     }
   }
 }
@@ -83,6 +92,7 @@ export default {
                   </template>
                   <template #footer>
                       <button class="like-button" @click="toggleLike" :class="{ clicked: isClicked }">Like</button>
+                      <span class="user-count">{{ userIdListLength }}</span>
                   </template>
               </pv-card>
           </div>
@@ -96,9 +106,6 @@ export default {
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     border-radius: 10px;
     transition: transform 0.3s;
-}
-.card-text {
-    font-size: 1rem;
 }
 .container{
     display: flex;
@@ -119,5 +126,10 @@ export default {
 .like-button.clicked {
   background-color: #ff0000;
   color: #fff;
+}
+.user-count {
+  margin-left: 10px;
+  font-size: 1.5rem;
+  font-weight: bold;
 }
 </style>
