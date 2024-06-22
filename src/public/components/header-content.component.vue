@@ -83,7 +83,7 @@ export default {
 }
 .card {
     width: 100%;
-    margin: 0;
     border-bottom: 1px solid black;
+    margin-bottom: 20px;
 }
 </style>

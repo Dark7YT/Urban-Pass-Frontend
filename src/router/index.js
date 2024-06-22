@@ -5,7 +5,7 @@ import EventListComponent from "../sections/eventManagement/pages/event-list.com
 import PageNotFoundComponent from "../public/pages/page-not-found.component.vue";
 import SignUpComponent from "../sections/authentication/pages/sign-up.component.vue";
 import SignInComponent from "../sections/authentication/pages/sign-in.component.vue";
-import EventDetailComponent from "../sections/eventManagement/components/event-detail.component.vue";
+import EventDetailComponent from "../sections/eventManagement/pages/event-detail.component.vue";
 
 const router = createRouter({
     history: createWebHistory(),

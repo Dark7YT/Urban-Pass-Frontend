@@ -11,6 +11,7 @@ export default {
         venue: null,
         city: null,
         country: null,
+        maxTickets: null,
         image: null,
         apiService: new EventApiService()
     }
@@ -20,7 +21,7 @@ export default {
           this.image = e.target.files[0];
       },
       async submitForm() {
-          if (!this.name || !this.description || !this.date || !this.venue || !this.city || !this.country) {
+          if (!this.name || !this.description || !this.date || !this.venue || !this.city || !this.country || !this.image || !this.maxTickets) {
               this.$toast.add({
                   severity: 'error',
                   summary: 'Error',
@@ -38,7 +39,8 @@ export default {
                   venue: this.venue,
                   city: this.city,
                   country: this.country
-              }
+              },
+              maxTickets: this.maxTickets
           };
 
           const formData = new FormData();
@@ -74,6 +76,7 @@ export default {
           this.city = null;
           this.country = null;
           this.image = null; // Limpiar el campo de la imagen
+          this.maxTickets = null;
           this.$refs.fileInput.value = null;
       }
   }
@@ -114,7 +117,10 @@ export default {
           <label for="country">Country</label>
         </pv-float-label>
       </div>
-
+      <pv-float-label class="event-create-element">
+        <pv-input-text id="maxTickets" class="event-create-text" v-model="maxTickets" />
+        <label for="maxTickets">Max Tickets</label>
+      </pv-float-label>
         <div class="input-row">
             <label for="image">Image</label>
             <input type="file" id="image" class="event-create-text" @change="onFileChange" accept=".jpg, .jpeg, .png" />
@@ -131,7 +137,6 @@ export default {
   justify-content: center;
   align-items: center;
   margin-top: 20px;
-  margin-bottom: 20px; /* Agrega un margen en la parte inferior */
 }
 .input-container {
   display: flex;

@@ -21,6 +21,7 @@ export default {
   text-align: center;
   padding: 1.2rem;
   border-top: 1px solid black; /* Agrega una línea negra en la parte superior */
+  margin-top: 20px;
 }
 .copyright{
   padding-bottom: 1rem;

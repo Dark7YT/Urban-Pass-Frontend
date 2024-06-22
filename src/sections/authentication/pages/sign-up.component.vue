@@ -12,10 +12,15 @@ export default {
             username: null,
             email: null,
             password: null,
+            emailIsValid: false,
             apiService: new SignUpApiService()
         }
     },
     methods: {
+        validateEmail() {
+          let regex = /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/;
+          this.emailIsValid = regex.test(this.email);
+        },
         async submitForm() {
             const userResource = {
                 username: this.username,
@@ -48,6 +53,11 @@ export default {
                 });
             }
         }
+    },
+    watch: {
+      email() {
+        this.validateEmail();
+      }
     }
 }
 </script>
@@ -60,9 +70,10 @@ export default {
             <label for="username">Username</label>
         </pv-float-label>
         <pv-float-label class="sign-up-element">
-            <pv-input-text id="email" class="sign-up-text" v-model="email" />
-            <label for="email">Email</label>
+          <pv-input-text id="email" class="sign-up-text" v-model="email" @input="validateEmail" />
+          <label for="email">Email</label>
         </pv-float-label>
+        <p v-if="!emailIsValid" class="error">Please enter a valid email.</p>
         <pv-float-label class="sign-up-element">
             <pv-password v-model="password" class="sign-up-text" inputId="password" />
             <label for="password">Password</label>
