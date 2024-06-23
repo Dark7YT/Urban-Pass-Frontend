@@ -120,8 +120,8 @@ export default {
                     <p class="text">Venue: {{ event.location.venue }}</p>
                     <p class="text">City: {{ event.location.city }}</p>
                     <p class="text">Country: {{ event.location.country }}</p>
-                    <p class="text">Country: {{ event.maxTickets }}</p>
-                    <p class="text">Country: {{ event.soldTickets }}</p>
+                    <p class="text">Max tickets: {{ event.maxTickets }}</p>
+                    <p class="text">Sold tickets: {{ event.soldTickets }}</p>
                 </div>
                 <img class = "event-image" alt="Event Image" :src="imageUrl" />
             </div>
